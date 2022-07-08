@@ -12,12 +12,13 @@ class Blog : public BlogInterface
 {
 public:
     Blog(const std::string &time_id, std::string netizen_id);
-    Blog(const std::string &time_id, std::string title, std::string content, std::string time,
-         int scan_nums, int like_nums, std::vector<std::string> materials_id,
+    Blog(std::string &time_id, std::string title, std::string content, std::string time,
+         int scan_nums, int like_nums, std::string netizen_id,std::vector<std::string> materials_id,
          std::vector<std::string> comments_id);
     virtual ~Blog();
 
     // Q:沒弄懂这个抽象的数据需要哪些
+
     // 获取博文的抽象
     virtual nlohmann::json getAbstract() override;
 

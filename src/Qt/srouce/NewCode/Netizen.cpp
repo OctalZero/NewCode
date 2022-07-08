@@ -1,5 +1,7 @@
 #include "Netizen.h"
 #include "BlogBroker.h"
+#include "Blog.h"
+#include <iostream>
 using json = nlohmann::json;
 using std::vector;
 using std::string;
@@ -18,7 +20,7 @@ Netizen::Netizen(const string id, string nick_name, vector<string> concerneds_id
         concerneds_.insert(pair<string, NetizenProxy>(c_id, NetizenProxy(c_id)));
     }
     for (auto &f_id : fans_id) {
-       fans_.insert(pair<std::string, NetizenProxy>(f_id, NetizenProxy(f_id)));
+        fans_.insert(pair<std::string, NetizenProxy>(f_id, NetizenProxy(f_id)));
     }
     for (auto &b_id : blogs_id) {
         blogs_.insert(pair<string, BlogProxy>(b_id, BlogProxy(b_id)));
@@ -61,11 +63,26 @@ nlohmann::json Netizen::getInfo()
         netizen_info["blogs"][blog.first]["content"] = blog_abstract["content"];
         // Q: 材料如何处理
         netizen_info["blogs"][blog.first]["material"] = blog_abstract["material"];
-        netizen_info["blogs"][blog.first][""] = blog_abstract["title"];
     }
 
     // Q: 为什么不处理评论
     return netizen_info;
+}
+
+nlohmann::json Netizen::ScanBlogs()
+{
+    std::vector<BlogProxy> BlogProxys=BlogBroker::getInstance()->PushBlogs();
+    json blogs;
+    for(auto &item:BlogProxys){
+        blogs[item.getId()]=item.getAbstract();
+    }
+    return blogs;
+}
+
+nlohmann::json Netizen::CheckBlog(std::string blog_id)
+{
+    Blog *blog=BlogBroker::getInstance()->FindById(blog_id);
+    return blog->getDetail();
 }
 
 nlohmann::json Netizen::getAbstract()

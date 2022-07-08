@@ -1,16 +1,22 @@
 #include "NetizenProxy.h"
 #include "Netizen.h"
 #include "NetizenBroker.h"
-NetizenProxy::NetizenProxy(const std::string &time_id):
-    NetizenInterface(time_id),Netizen_(nullptr)
+
+NetizenProxy::NetizenProxy(const std::string &time_id)
+    :NetizenInterface{time_id}, netizen_{nullptr}
+{
+
+}
+
+NetizenProxy::~NetizenProxy()
 {
 
 }
 
 nlohmann::json NetizenProxy::getAbstract()
 {
-    if(Netizen_==nullptr){
-        Netizen_=NetizenBroker::getInstance()->findById(getId());
+    if(netizen_ == nullptr){
+        netizen_ = NetizenBroker::getInstance()->FindById(getId());
     }
-    return Netizen_->getAbstract();
+    return netizen_->getAbstract();
 }

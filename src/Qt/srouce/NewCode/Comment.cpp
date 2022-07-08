@@ -6,7 +6,6 @@ Comment::Comment(const std::string time_id, std::string content,
         std::string commenter_id, std::string blog_id, int like_nums)
     : CommentInterface{time_id}, commenter_proxy_(commenter_id),
       blog_proxy_{blog_id}, content_ {content}, like_nums_{like_nums}
-
 {
 
 }

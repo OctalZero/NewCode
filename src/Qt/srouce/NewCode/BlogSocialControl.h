@@ -5,6 +5,8 @@
 
 class BlogSocialControl
 {
+public:
+
     BlogSocialControl();
     ~BlogSocialControl();
 

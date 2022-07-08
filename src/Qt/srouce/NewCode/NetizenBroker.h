@@ -2,7 +2,8 @@
 #define NETIZENBROKER_H
 
 #include "RelationalBroker.h"
-
+#include <unordered_map>
+#include <string>
 class Netizen;
 
 class NetizenBroker : public RelationalBroker

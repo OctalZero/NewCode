@@ -3,7 +3,7 @@
 
 #include "RelationalBroker.h"
 class Blog;
-
+class BlogProxy;
 class BlogBroker : public RelationalBroker
 {
 public:
@@ -13,6 +13,9 @@ public:
 
     // TODO: 查询博文(通过time_id)
     Blog *FindById(std::string time_id);
+
+    // 推送博文，根据顺序，挑选最近几个
+    std::vector<BlogProxy> PushBlogs();
 
     // TODO：查询素材（通过博文id）
     std::vector<std::string> FindMaterials(std::string blog_id);
@@ -29,6 +32,7 @@ public:
 
 //    // TODO: 缓存未实现 更新缓存
 //    void UpdateCache() override;
+
 private:
     BlogBroker();
 private:

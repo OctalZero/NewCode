@@ -2,6 +2,7 @@ QT -= gui
 
 CONFIG += c++17 console
 CONFIG -= app_bundle
+LIBS += -lmariadbcpp
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -51,6 +52,7 @@ HEADERS += \
     NetizenBroker.h \
     NetizenInterface.h \
     NetizenProxy.h \
-    RelationalBroker.h
+    RelationalBroker.h \
+    TimeInfo.h
 
 INCLUDEPATH += ../../include

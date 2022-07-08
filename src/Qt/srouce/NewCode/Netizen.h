@@ -19,8 +19,14 @@ public:
     // 发布博文
     bool PublishBlog(std::string content, std::string time);
 
-    // 获取网民详细信息
+    // 获取网民详细信息 功能一
     nlohmann::json getInfo();
+
+    // 浏览博文 功能二
+    nlohmann::json ScanBlogs();
+
+    // 查看博文 功能三
+    nlohmann::json CheckBlog(std::string blog_id);
 
     // 获取网民的抽象
     virtual nlohmann::json getAbstract() override;

@@ -10,10 +10,15 @@ Blog::Blog(const std::string &time_id, std::string netizen_id)
 
 }
 
-Blog::Blog(const std::string &time_id, std::string title, std::string content, std::string time,
-           int scan_nums, int like_nums, std::vector<std::string> materials_id,
+Blog::~Blog()
+{
+
+}
+
+Blog::Blog(std::string &time_id, std::string title, std::string content, std::string time,
+           int scan_nums, int like_nums, std::string netizen_id,std::vector<std::string> materials_id,
            std::vector<std::string> comments_id)
-  : BlogInterface{time_id}, blogger_{time_id}, title_{title}, content_{content}, time_{time},
+  : BlogInterface{time_id},blogger_{netizen_id}, title_{title}, content_{content}, time_{time},
     scan_nums_{scan_nums}, like_nums_{like_nums}
 {
     for(const auto& material : materials_id) {

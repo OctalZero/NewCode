@@ -10,7 +10,7 @@
 class Comment : public CommentInterface
 {
 public:
-    Comment(const std::string time_id, std::string content,
+    Comment(std::string time_id, std::string content,
             std::string commenter_id, std::string blog_id, int like_nums);
     virtual ~Comment();
 
