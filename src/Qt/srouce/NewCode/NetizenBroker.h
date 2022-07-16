@@ -27,9 +27,6 @@ public:
     // TODO:查找评论(通过网民id)
     std::vector<std::string> FindComments(std::string id);
 
-//    // TODO: 缓存未实现 更新缓存
-//    void UpdateCache() override;
-
     virtual ~NetizenBroker();
 private:
     NetizenBroker();

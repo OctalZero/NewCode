@@ -43,8 +43,6 @@ public:
     // 获取博文
     const std::vector<std::string> getBlogs() const;
 
-
-
 private:
     std::string nick_name_;  // 昵称
     std::unordered_map<std::string, NetizenProxy> concerneds_;  // 关注的博主

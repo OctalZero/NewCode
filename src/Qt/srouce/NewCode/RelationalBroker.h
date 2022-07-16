@@ -19,8 +19,6 @@ public:
     // 数据库插入操作
     void InsertDatabase(std::string command);
 
-//    // 更新缓存，由子类实现
-//    virtual void UpdateCache() = 0;
 private:
     std::unique_ptr<sql::Connection> connection_;  // 数据库连接对象
 };
