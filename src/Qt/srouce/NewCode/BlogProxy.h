@@ -16,6 +16,7 @@ public:
     // 获取博文的详细信息
     virtual nlohmann::json getDetail() override;
 
+
 private:
     Blog* blog_;  // 博文对象
 };

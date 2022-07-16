@@ -64,6 +64,11 @@ nlohmann::json Blog::getDetail()
     return blog_abstract;
 }
 
+const string Blog::getNetizenId() const
+{
+    return blogger_.getId();
+}
+
 const std::string Blog::getTitle() const
 {
     return title_;

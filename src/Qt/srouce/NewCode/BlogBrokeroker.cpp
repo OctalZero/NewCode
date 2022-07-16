@@ -1,6 +1,7 @@
 #include "BlogBroker.h"
 #include "Blog.h"
 #include "BlogProxy.h"
+#include <iostream>
 BlogBroker* BlogBroker::blog_broker_ = nullptr;
 
 BlogBroker *BlogBroker::getInstance()
@@ -80,6 +81,14 @@ std::string command="select c_id from Comment where b_id="+blog_id;
         commentIds.push_back(commentid);
     }
     return commentIds;
+}
+
+bool BlogBroker::InsertBlog(Blog *blog)
+{
+    std::string command="insert into Blog (b_id,b_content,b_time,n_id) values('"+blog->getId()+"','"+blog->getContent()+"','"+blog->getTime()+"','"+blog->getNetizenId()+"')";
+    std::cout<<command<<std::endl;
+    RelationalBroker::InsertDatabase(command);
+
 }
 BlogBroker::BlogBroker()
 {

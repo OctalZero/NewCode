@@ -30,6 +30,9 @@ public:
     int FindScanNums(std::string blog_id);
 
 
+    // 将博文存入数据库
+    bool InsertBlog(Blog *blog);
+
 //    // TODO: 缓存未实现 更新缓存
 //    void UpdateCache() override;
 
