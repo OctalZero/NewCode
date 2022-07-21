@@ -24,7 +24,7 @@ Netizen *NetizenBroker::FindById(std::string id)
     // 数据库中找，然后实例化 Netizen
 
     // Future: 未处理查询不到的情况
-    std::string command = "select * from Netizen where n_id=" + id;
+    std::string command = "select * from Netizen where N_id=" + id;
     std::string nickName;
     sql::ResultSet* result = RelationalBroker::QueryDatabase(command);
     // 返回结果
@@ -39,7 +39,7 @@ Netizen *NetizenBroker::FindById(std::string id)
 
 std::vector<std::string> NetizenBroker::FindConcereds(std::string id)
 {
-    std::string command="select r_id from Relation where n_fan_id="+id;
+    std::string command="select NR_author_id from NetizenRelation where NR_fan_id="+id;
     std::vector<std::string> conceredIds;
     sql::ResultSet* res=RelationalBroker::QueryDatabase(command);
 
@@ -51,7 +51,7 @@ std::vector<std::string> NetizenBroker::FindConcereds(std::string id)
 
 std::vector<std::string> NetizenBroker::FindFans(std::string id)
 {
-    std::string command="select n_fan_id from Relation where r_id="+id;
+    std::string command="select NR_fan_id from NetizenRelation where NR_author_id="+id;
     std::vector<std::string> fansIds;
     sql::ResultSet* res=RelationalBroker::QueryDatabase(command);
 
@@ -63,7 +63,7 @@ std::vector<std::string> NetizenBroker::FindFans(std::string id)
 
 std::vector<std::string> NetizenBroker::FindBlogs(std::string id)
 {
-    std::string command = "select b_id from Blog where n_id="+id;
+    std::string command = "select B_id from Blog where N_id="+id;
     sql::ResultSet* result = RelationalBroker::QueryDatabase(command);
     std::vector<std::string> blog_ids;
 
@@ -75,7 +75,7 @@ std::vector<std::string> NetizenBroker::FindBlogs(std::string id)
 
 std::vector<std::string> NetizenBroker::FindComments(std::string id)
 {
-    std::string command="select c_id from Comment where b_id="+id;
+    std::string command="select C_id from Comment where B_id="+id;
     std::vector<std::string> commentIds;
     sql::ResultSet* res=RelationalBroker::QueryDatabase(command);
 

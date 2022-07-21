@@ -41,7 +41,7 @@ bool Netizen::PublishBlog(std::string title,std::string content, std::string blo
     vector<std::string> command_ids;
 
     //创建笔记对象
-    Blog* blog=new Blog(blog_id,title,content,time,0,0,getId(),materials_ids,command_ids);
+    Blog* blog=new Blog(blog_id,title,content,time,getId(),materials_ids,command_ids);
 
     //建立netizen和comment的联系，并将netizen放到DirtyCache
     blogs_.insert(std::pair<std::string,BlogProxy>(blog->getId(),BlogProxy(blog->getId())));

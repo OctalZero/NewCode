@@ -48,7 +48,6 @@ private:
     std::unordered_map<std::string, NetizenProxy> concerneds_;  // 关注的博主
     std::unordered_map<std::string, NetizenProxy> fans_;  // 粉丝
     std::unordered_map<std::string, BlogProxy> blogs_;  // 发布的博文
-    std::unordered_map<std::string, BlogProxy> collectblogs_;  // 收藏的博文
     std::unordered_map<std::string, CommentProxy> comments_;  // 发布的评论
 };
 

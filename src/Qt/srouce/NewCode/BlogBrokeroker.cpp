@@ -20,23 +20,21 @@ BlogBroker::~BlogBroker()
 Blog *BlogBroker::FindById(std::string id)
 {
     // TODO: 先找缓存中找，如果没找到在数据库中找
-    std::string command="select * from Blog where b_id="+id;
+    std::string command="select * from Blog where B_id="+id;
     sql::ResultSet* res=RelationalBroker::QueryDatabase(command);
-    std::string content,nid,time;
+    std::string content,nid,time,title;
     // Loop through and print results
     while (res->next()) {
         id=res->getString(1);
-        content=res->getString(2);
-        time=res->getString(3);
-        nid=std::to_string(res->getInt(4));
+        title=res->getString(2);
+        content=res->getString(3);
+        time=res->getString(4);
+        nid=res->getString(5);
     }
-    //retrieveJotting(id)
 
     // 硬编码，后续处理
-    int scannum=1,likenum=1;
-    std::string title="CSND";
 
-    Blog *blog=new Blog(id,title,content,time,scannum,likenum,nid,FindMaterials(id),FindComments(id));
+    Blog *blog=new Blog(id,title,content,time,nid,FindMaterials(id),FindComments(id));
 
     return blog;
 }
@@ -57,7 +55,7 @@ std::vector<BlogProxy> BlogBroker::PushBlogs()
 std::vector<std::string> BlogBroker::FindMaterials(std::string blog_id)
 {
     std::vector<std::string> materialIds;
-std::string command="select m_id from Material where b_id="+blog_id;
+std::string command="select M_id from Material where B_id="+blog_id;
     sql::ResultSet* res=RelationalBroker::QueryDatabase(command);
 
     std::string materialid;
@@ -72,7 +70,7 @@ std::string command="select m_id from Material where b_id="+blog_id;
 std::vector<std::string> BlogBroker::FindComments(std::string blog_id)
 {
     std::vector<std::string> commentIds;
-std::string command="select c_id from Comment where b_id="+blog_id;
+std::string command="select C_id from Comment where B_id="+blog_id;
     sql::ResultSet* res=RelationalBroker::QueryDatabase(command);
 
     std::string commentid;
@@ -85,7 +83,7 @@ std::string command="select c_id from Comment where b_id="+blog_id;
 
 bool BlogBroker::InsertBlog(Blog *blog)
 {
-    std::string command="insert into Blog (b_id,b_content,b_time,n_id) values('"+blog->getId()+"','"+blog->getContent()+"','"+blog->getTime()+"','"+blog->getNetizenId()+"')";
+    std::string command="insert into Blog (B_id,B_content,B_time,N_id) values('"+blog->getId()+"','"+blog->getContent()+"','"+blog->getTime()+"','"+blog->getNetizenId()+"')";
     std::cout<<command<<std::endl;
     RelationalBroker::InsertDatabase(command);
 

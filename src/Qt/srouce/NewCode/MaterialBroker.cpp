@@ -21,7 +21,7 @@ Material *MaterialBroker::FindById(std::string time_id)
     // TODO: 先找缓存中找，如果没找到在数据库中找
 
 
-    std::string command="select * from Material where m_id="+time_id;
+    std::string command="select * from Material where M_id="+time_id;
     sql::ResultSet* res=RelationalBroker::QueryDatabase(command);
     std::string id,path,jId;
     // Loop through and print results

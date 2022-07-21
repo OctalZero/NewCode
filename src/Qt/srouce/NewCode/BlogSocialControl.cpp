@@ -20,6 +20,7 @@ nlohmann::json BlogSocialControl::Login(std::string netizen_id)
     // TODO:填写日志、读取日志
     //netizen->writeLog();
     //netizen->readLog();
+
     return netizen->getInfo();
 }
 

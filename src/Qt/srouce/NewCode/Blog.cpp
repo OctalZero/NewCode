@@ -15,11 +15,8 @@ Blog::~Blog()
 
 }
 
-Blog::Blog(std::string &time_id, std::string title, std::string content, std::string time,
-           int scan_nums, int like_nums, std::string netizen_id,std::vector<std::string> materials_id,
-           std::vector<std::string> comments_id)
-  : BlogInterface{time_id},blogger_{netizen_id}, title_{title}, content_{content}, time_{time},
-    scan_nums_{scan_nums}, like_nums_{like_nums}
+Blog::Blog(std::string &time_id, std::string title, std::string content, std::string time,std::string netizen_id,std::vector<std::string> materials_id,std::vector<std::string> comments_id)
+  : BlogInterface{time_id},blogger_{netizen_id}, title_{title}, content_{content}, time_{time}
 {
     for(const auto& material : materials_id) {
         materials_.insert(pair<string, MaterialProxy>(material, MaterialProxy(material)));
@@ -36,8 +33,6 @@ nlohmann::json Blog::getAbstract()
     blog_abstract["title"] = title_;
     blog_abstract["content"] = content_;
     blog_abstract["time"] = time_;
-    blog_abstract["scan_nums"] = scan_nums_;
-    blog_abstract["like_nums"] = like_nums_;
     for(auto& material : materials_){
         blog_abstract["materials"][material.first] = material.second.getAbstract();
     }
@@ -52,8 +47,6 @@ nlohmann::json Blog::getDetail()
     blog_abstract["title"] = title_;
     blog_abstract["content"] = content_;
     blog_abstract["time"] = time_;
-    blog_abstract["scan_nums"] = scan_nums_;
-    blog_abstract["like_nums"] = like_nums_;
     for(auto& material : materials_){
         blog_abstract["materials"][material.first] = material.second.getAbstract();
     }
@@ -82,16 +75,6 @@ const string Blog::getContent() const
 const string Blog::getTime() const
 {
     return time_;
-}
-
-int Blog::getScanNums() const
-{
-    return scan_nums_;
-}
-
-int Blog::getLikeNums() const
-{
-    return like_nums_;
 }
 
 const std::vector<string> Blog::getMaterialId() const
