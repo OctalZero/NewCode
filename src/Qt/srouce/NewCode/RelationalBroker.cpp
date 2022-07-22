@@ -14,7 +14,7 @@ RelationalBroker::RelationalBroker()
     // 建立连接
     std::unique_ptr<sql::Connection> conn(driver->connect(url, properties));
     connection_ = std::move(conn);
-    InitDatabase();
+    //InitDatabase();
 }
 
 RelationalBroker::~RelationalBroker()
@@ -39,7 +39,7 @@ void RelationalBroker::InitDatabase()
         stmnt->executeQuery();
 
         //Blog
-        std::unique_ptr<sql::PreparedStatement> stmnt2(connection_->prepareStatement("create table Blog(B_id varchar(30),B_name varchar(30),B_content varchar(2000),B_time DATETIME(2),N_id varchar(30),primary key(B_id),foreign key(B_id) references Netizen(N_id))"));
+        std::unique_ptr<sql::PreparedStatement> stmnt2(connection_->prepareStatement("create table Blog(B_id varchar(30),B_name varchar(30),B_content varchar(2000),B_time DATETIME(2),N_id varchar(30),primary key(B_id),foreign key(N_id) references Netizen(N_id))"));
         stmnt2->executeQuery();
 
         //Material
