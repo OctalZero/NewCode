@@ -2,6 +2,9 @@
 #define MATERIALBROKER_H
 
 #include "RelationalBroker.h"
+#include <nlohmann/json.hpp>
+
+using json = nlohmann::json;
 class Material;
 
 class MaterialBroker : public RelationalBroker
@@ -11,11 +14,12 @@ public:
     static MaterialBroker *getInstance();
     virtual ~MaterialBroker();
 
+    // 在数据库中查找
+    json InDatabase(std::string id);
+
     // TODO:查找素材（通过素材选取时间）
     Material *FindById(std::string time_id);
 
-    //    // TODO: 缓存未实现 更新缓存
-    //    void UpdateCache() override;
 private:
     MaterialBroker();
 private:

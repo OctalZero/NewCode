@@ -2,6 +2,9 @@
 #define BLOGBROKER_H
 
 #include "RelationalBroker.h"
+#include <nlohmann/json.hpp>
+
+using json = nlohmann::json;
 class Blog;
 class BlogProxy;
 class BlogBroker : public RelationalBroker
@@ -11,30 +14,17 @@ public:
     static BlogBroker *getInstance();
     virtual ~BlogBroker();
 
+    // 从数据库中查找博文
+    json InDatabase(std::string id);
+
     // TODO: 查询博文(通过time_id)
     Blog *FindById(std::string time_id);
 
     // 推送博文，根据顺序，挑选最近几个
     std::vector<BlogProxy> PushBlogs();
 
-    // TODO：查询素材（通过博文id）
-    std::vector<std::string> FindMaterials(std::string blog_id);
-
-    // TODO: 查询评论（通过博文id）
-    std::vector<std::string> FindComments(std::string blog_id);
-
-    // TODO：查询点赞数（通过博文id）
-    int FindLikeNums(std::string blog_id);
-
-    // TODO: 查询浏览数
-    int FindScanNums(std::string blog_id);
-
-
-    // 将博文存入数据库
+    // 将博文存入数据库 测试使用
     bool InsertBlog(Blog *blog);
-
-//    // TODO: 缓存未实现 更新缓存
-//    void UpdateCache() override;
 
 private:
     BlogBroker();

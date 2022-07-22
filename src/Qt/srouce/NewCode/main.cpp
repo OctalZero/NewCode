@@ -1,6 +1,7 @@
 #include <QCoreApplication>
 #include "BlogSocialControl.h"
 #include "RelationalBroker.h"
+#include "NetizenBroker.h"
 #include <iostream>
 #include <vector>
 #include <string>
@@ -11,6 +12,7 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
     BlogSocialControl control;
+
 
     std::cout<<"登陆："<<std::endl;
     std::cout<< control.Login("1").dump(4)<<std::endl;

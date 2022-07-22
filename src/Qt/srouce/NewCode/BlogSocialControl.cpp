@@ -46,4 +46,3 @@ bool BlogSocialControl::Comment(std::string netizen_id, std::string blog_id, std
 {
 
 }
-

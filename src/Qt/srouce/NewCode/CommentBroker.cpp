@@ -15,22 +15,37 @@ CommentBroker::~CommentBroker()
 
 }
 
-Comment *CommentBroker::FindById(std::string time_id)
+json CommentBroker::InDatabase(std::string id)
 {
-    // TODO: 先找缓存中找，如果没找到在数据库中找
-    std::string command="select * from Comment where C_id="+time_id;
+    json commentJson;
+
+    std::string command="select * from Comment where C_id="+id;
     sql::ResultSet* res=RelationalBroker::QueryDatabase(command);
-    std::string id,content,nid,jid;
+    std::string C_id,C_content,N_id,B_id;
     // Loop through and print results
     while (res->next()) {
-        id=res->getString(1);
-        content=res->getString(2);
-        nid=res->getString(3);
-        jid=res->getString(4);
+        C_id=res->getString(1);
+        C_content=res->getString(2);
+        N_id=res->getString(3);
+        B_id=res->getString(4);
     }
-    //retrieveComment(id)
+    commentJson["C_id"] = C_id;
+    commentJson["C_content"] = C_content;
+    commentJson["N_id"] = N_id;
+    commentJson["B_id"] = B_id;
 
-    Comment *comment=new Comment(id,content,nid,jid);
+    return commentJson;
+}
+
+Comment *CommentBroker::FindById(std::string time_id)
+{
+    json commentJson;
+    // TODO: 先找缓存中找，如果没找到在数据库中找
+
+    commentJson = InDatabase(time_id);
+
+    Comment *comment=new                 Comment(commentJson["C_id"],commentJson["C_content"],commentJson["N_id"],commentJson["B_id"]);
+
     return comment;
 }
 

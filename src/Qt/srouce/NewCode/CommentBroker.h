@@ -2,6 +2,9 @@
 #define COMMENTBROKER_H
 
 #include "RelationalBroker.h"
+#include <nlohmann/json.hpp>
+
+using json = nlohmann::json;
 class Comment;
 
 class CommentBroker : public RelationalBroker
@@ -11,11 +14,11 @@ public:
     static CommentBroker *getInstance();
     virtual ~CommentBroker();
 
+    // 在数据库中查找
+    json InDatabase(std::string id);
+
     // TODO:查找评论（通过评论发布时间）:
     Comment *FindById(std::string time_id);
-
-    //    // TODO: 缓存未实现 更新缓存
-    //    void UpdateCache() override;
 
 private:
     CommentBroker();
