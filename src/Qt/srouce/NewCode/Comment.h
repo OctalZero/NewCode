@@ -10,7 +10,7 @@
 class Comment : public CommentInterface
 {
 public:
-    Comment(std::string time_id, std::string content,
+    Comment(std::string time_id, std::string content,std::string time,
             std::string commenter_id, std::string blog_id);
     virtual ~Comment();
 
@@ -28,6 +28,7 @@ public:
 
 
 private:
+    std::string time_; // 评论时间
     NetizenProxy commenter_proxy_;  // 评论者的代理对象
     BlogProxy blog_proxy_;  // 博文的代理对象
     std::string content_;  // 回复的内容

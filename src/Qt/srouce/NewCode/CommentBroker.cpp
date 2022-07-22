@@ -21,16 +21,18 @@ json CommentBroker::InDatabase(std::string id)
 
     std::string command="select * from Comment where C_id="+id;
     sql::ResultSet* res=RelationalBroker::QueryDatabase(command);
-    std::string C_id,C_content,N_id,B_id;
+    std::string C_id,C_content,C_time,N_id,B_id;
     // Loop through and print results
     while (res->next()) {
         C_id=res->getString(1);
         C_content=res->getString(2);
-        N_id=res->getString(3);
-        B_id=res->getString(4);
+        C_time = res->getString(3);
+        N_id=res->getString(4);
+        B_id=res->getString(5);
     }
     commentJson["C_id"] = C_id;
     commentJson["C_content"] = C_content;
+    commentJson["C_time"] = C_time;
     commentJson["N_id"] = N_id;
     commentJson["B_id"] = B_id;
 
@@ -44,7 +46,7 @@ Comment *CommentBroker::FindById(std::string time_id)
 
     commentJson = InDatabase(time_id);
 
-    Comment *comment=new                 Comment(commentJson["C_id"],commentJson["C_content"],commentJson["N_id"],commentJson["B_id"]);
+    Comment *comment=new                 Comment(commentJson["C_id"],commentJson["C_content"],commentJson["C_content"],commentJson["N_id"],commentJson["B_id"]);
 
     return comment;
 }

@@ -14,7 +14,7 @@ RelationalBroker::RelationalBroker()
     // 建立连接
     std::unique_ptr<sql::Connection> conn(driver->connect(url, properties));
     connection_ = std::move(conn);
-    //InitDatabase();
+    InitDatabase();
 }
 
 RelationalBroker::~RelationalBroker()
@@ -51,7 +51,7 @@ void RelationalBroker::InitDatabase()
         stmnt4->executeQuery();
 
         //Comment
-        std::unique_ptr<sql::PreparedStatement> stmnt5(connection_->prepareStatement("create table Comment(C_id varchar(30),C_content varchar(2000),N_id varchar(30),B_id varchar(30),primary key(C_id),foreign key(N_id) references Netizen(N_id),foreign key(B_id) references Blog(B_id))"));
+        std::unique_ptr<sql::PreparedStatement> stmnt5(connection_->prepareStatement("create table Comment(C_id varchar(30),C_content varchar(2000),C_time DATETIME(2),N_id varchar(30),B_id varchar(30),primary key(C_id),foreign key(N_id) references Netizen(N_id),foreign key(B_id) references Blog(B_id))"));
         stmnt5->executeQuery();
 
 
@@ -165,20 +165,22 @@ void RelationalBroker::InitDatabase()
         stmnt9->execute();
 
         // 添加评论信息
-        std::unique_ptr<sql::PreparedStatement> stmnt10(connection_->prepareStatement("insert into Comment (C_id,C_content,N_id,B_id) values(?,?,?,?)"));
+        std::unique_ptr<sql::PreparedStatement> stmnt10(connection_->prepareStatement("insert into Comment (C_id,C_content,C_time,N_id,B_id) values(?,?,?,?,?)"));
 
         stmnt10->setString(1,"1");
         stmnt10->setString(2,"Good!!");
-        stmnt10->setString(3,"1");
+        stmnt10->setDateTime(3,"2022-05-22 10:00:01");
         stmnt10->setString(4,"1");
+        stmnt10->setString(5,"1");
         stmnt10->execute();
 
         stmnt10->setString(1,"2");
         stmnt10->setString(2,"This is a good song!");
-        stmnt10->setString(3,"2");
+        stmnt10->setDateTime(3,"2022-05-22 10:00:01");
         stmnt10->setString(4,"2");
+        stmnt10->setString(5,"2");
         stmnt10->execute();
-
+        //std::cout<<"wanc"<<std::endl;
     }catch(sql::SQLException& e){
         std::cerr << e.what() << std::endl;
     }
